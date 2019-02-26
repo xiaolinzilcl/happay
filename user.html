@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./lib/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="./lib/bootstrap-validator/css/bootstrapValidator.min.css">
     <link rel="stylesheet" href="./lib/nprogress/nprogress.css">
+
     <link rel="stylesheet" href="./css/common.css">
     <title>Document</title>
 </head>
@@ -40,62 +41,130 @@
 
     </div>
     <!--右侧-->
- 
-<!-- 右侧内容 -->
-<div class="lt_main">
+
+    <!-- 右侧内容 -->
+    <div class="lt_main">
         <!-- 头部导航菜单 -->
         <div class="lt_topbar">
-          <a href="#" class="pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
-          <a href="#" class="pull-right icon_logout"><i class="glyphicon glyphicon-log-out"></i></a>
+            <a href="#" class="pull-left icon_menu"><i class="glyphicon glyphicon-align-justify"></i></a>
+            <a href="#" class="pull-right icon_logout"><i class="glyphicon glyphicon-log-out"></i></a>
         </div>
         <!--下面的主体内容-->
         <div class="container-fluid">
-               <!--路径导航-->
-        <ol class="breadcrumb">
+            <!--路径导航-->
+            <ol class="breadcrumb">
                 <li><a href="#">管理系统</a></li>
-                <li><a href="#">首页1</a></li>
-                <li class="active">首页</li>
+
+                <li class="active">用户管理</li>
             </ol>
-            <div class="lt_content">
-                    <div class="echarts_1 pull-left"></div>
-                    <div class="echarts_2 pull-right"></div>
-                </div>
+            <div class="lt_content user_content">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>用户名</th>
+                            <th>手机号</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    
+                            
+                              
+                    </tbody>
 
+                    
 
-        </div>
-     
+                </table>
+<div class="pull-right"> <ul id="paginator"></ul>
 </div>
+              
 
-
-
-
-<!-- 登录退出的模态框,  配置 data-dismiss="modal" 可以关闭模态框 -->
-<div class="modal fade" id="logoutModal">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
-              <h4 class="modal-title">温馨提示</h4>
             </div>
-            <div class="modal-body">
-              <p class="red"><i class="glyphicon glyphicon-info-sign"></i>您确定要退出后台管理系统吗？</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-              <button type="button" class="btn btn-primary" id="logoutBtn">退出</button>
-            </div>
-          </div>
+
+
         </div>
-      </div>
-      
+
+    </div>
+
+<!--用户页面的点击每一条数据显示的模态框-->
+<div class="modal fade" id="userModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="red"><i class="glyphicon glyphicon-info-sign"></i>您确定修改此条数据吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="comfirmBtn">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 登录退出的模态框,  配置 data-dismiss="modal" 可以关闭模态框 -->
+    <div class="modal fade" id="logoutModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <h4 class="modal-title">温馨提示</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="red"><i class="glyphicon glyphicon-info-sign"></i>您确定要退出后台管理系统吗？</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="logoutBtn">退出</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--制作模板 isDelete 0 表示禁用 ，1 表示启用 
+        isDelete 为0 ,那么后面的按钮就是启用
+        isDelete 为1 ,那么后面的按钮就是禁用
+
+        (page-1)*size+当前的第几个
+      -->
+<script type=text/template id="tp1">
+    {{each rows v i}}
+    <tr>
+            <td>{{i+1+( (page-1)*size) }}</td>
+            <td>{{v.username}}</td>
+            <td>{{v.mobile}}</td>
+            <td>{{ v.isDelete=== 1 ? '正常' : '已禁用' }}</td>
+            <td data-id="{{v.id}}">
+                {{if v.isDelete === 1 }}
+                <button class="btn btn-danger">禁用</button> 
+                 
+               {{ else }}
+               <button class="btn btn-success">启用</button> 
+               {{  /if }}
+            
+            </td>
+          </tr>
+        
+{{/each}}
+    
+</script>
+
     <script src="./lib/jquery/jquery.min.js"></script>
     <script src="./js/isLogin.js"></script>
     <script src="./lib/bootstrap/js/bootstrap.js"></script>
     <script src="./lib/bootstrap-validator/js/bootstrapValidator.min.js"></script>
     <script src="./lib/nprogress/nprogress.js"></script>
+    <script src="./js/isLogin.js"></script>
     <script src="./js/common.js"></script>
-    <script src="./js/login.js"></script>
-   
+    <script src="./lib/artTemplate/template-web.js"></script>
+    <script src="./lib/bootstrap-paginator/bootstrap-paginator.min.js"></script>
+    <script src="./js/user.js"></script>
+
 
 </body>
 

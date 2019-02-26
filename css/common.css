@@ -111,3 +111,18 @@ transition:all 1s;
 .lt_topbar.hidemenu{padding-left:0;
  
 }
+/*用户管理*/
+
+.table-bordered > thead > tr > th,.table-bordered
+>tbody >tr >td{text-align:center;
+  /*表格内容垂直居中*/
+  vertical-align: center;
+}
+.table.table-bordered > thead > tr > th,
+.table.table-bordered > tbody > tr > th, 
+.table.table-bordered > tfoot > tr > th, 
+.table.table-bordered > thead > tr > td,
+.table.table-bordered > tbody > tr > td,
+.table.table-bordered > tfoot > tr > td{
+  vertical-align: center;
+    }
