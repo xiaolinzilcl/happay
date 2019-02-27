@@ -126,3 +126,6 @@ transition:all 1s;
 .table.table-bordered > tfoot > tr > td{
   vertical-align: center;
     }
+
+    /*一级分类页面*/
+    .first_content table{margin-top:30px;}
