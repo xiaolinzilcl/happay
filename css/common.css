@@ -129,3 +129,12 @@ transition:all 1s;
 
     /*一级分类页面*/
     .first_content table{margin-top:30px;}
+
+    /*二级分类页面*/
+ #second_tbody td img{height:50px;}
+ .mtop30{margin-top:30px;}
+ #addModal .fileimg{width:100px;height:100px;}
+#secondtp2 li{padding-left:15px;
+line-height:30px;
+}
+#secondtp2 li:hover{background:#204d74;color:#fff;}
